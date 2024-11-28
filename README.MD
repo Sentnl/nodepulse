@@ -13,7 +13,7 @@
 </div>
 
 
-NodePulse is a lightweight JavaScript library designed to help developers maintain and utilize a list of healthy nodes (Currently it supports Hyperion and Atomic API nodes). The library connects to an Cloudflare Load Balanced API https://nodes.nodepulse.co (Which in turn connects to 3 backend APIs running on different cloud platforms) that provides a list of healthy nodes, which it regularly refreshes, and falls back to a predefined list of default nodes in case of not being able to contact any of the backends. 
+NodePulse is a lightweight JavaScript library designed to help developers maintain and utilize a list of healthy nodes (Currently it supports Hyperion and Atomic API nodes). The library connects to an Cloudflare Load Balanced API https://nodes.nodepulse.co/nodes (Which in turn connects to 3 backend APIs running on different cloud platforms) that provides a list of healthy nodes, which it regularly refreshes, and falls back to a predefined list of default nodes in case of not being able to contact any of the backends. 
 
 ✋ In the Future if more Guilds offer to run this backend service, we can configure cloudflare to automatically add/remove backends from the proxy pool.
 ✋ We can even configure multiple  Load Balanced API proxies, so we don't rely on cloudflare.
