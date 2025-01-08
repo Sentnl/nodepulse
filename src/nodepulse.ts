@@ -6,7 +6,7 @@ const DEFAULT_QRY_HUB_API = 'https://api.hub.qry.network';
 
 export interface NodePulseOptions {
     chainId?: string;
-    nodeType?: 'hyperion' | 'atomic';
+    nodeType?: 'hyperion' | 'atomic' | 'lightapi' | 'ipfs';
     network?: 'mainnet' | 'testnet';
     nodeCount?: number;
     updateInterval?: number;
@@ -230,7 +230,6 @@ export class NodePulse {
     }
 
     async fetchNodes(): Promise<string[]> {
-
         if (!this.options.apiUrl) {
             throw new Error('API URL is required');
         }
@@ -249,6 +248,7 @@ export class NodePulse {
             url.searchParams.append('count', this.options.nodeCount.toString());
         }
 
+        // Only add filtering parameters for Hyperion and Atomic nodes
         switch (this.options.nodeType) {
             case 'hyperion': {
                 if (this.options.historyfull !== undefined) {
@@ -271,7 +271,16 @@ export class NodePulse {
         }
 
         try {
-            return (await (await fetch(url.toString())).json() as NodeData[])
+            const response = await fetch(url.toString());
+            const nodes = await response.json();
+            
+            // For LightAPI and IPFS, just map URLs directly
+            if (this.options.nodeType === 'lightapi' || this.options.nodeType === 'ipfs') {
+                return nodes.map((node: any) => node.url);
+            }
+
+            // For Hyperion and Atomic, apply filtering
+            return (nodes as NodeData[])
                 .filter(node => this.applyFilterRules(node))
                 .map(node => node.url);
         } catch (error: any) {

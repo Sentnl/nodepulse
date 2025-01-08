@@ -1,7 +1,7 @@
 {
   "name": "@sentnl/nodepulse",
-  "version": "1.0.21",
-  "description": "NodePulse is a lightweight JavaScript library designed to help developers maintain and utilize a list of healthy nodes (Currently it supports Hyperion and Atomic API nodes). The library connects to an API that provides a list of healthy nodes, which it regularly refreshes, and can fallback to a predefined list of default nodes in case of API failure.",
+  "version": "1.1.0",
+  "description": "NodePulse is a lightweight JavaScript library designed to help developers maintain and utilize a list of healthy nodes (Currently it supports Hyperion, Atomic API, LightAPI, and IPFS nodes). The library connects to an API that provides a list of healthy nodes, which it regularly refreshes, and can fallback to a predefined list of default nodes in case of API failure.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "exports": {

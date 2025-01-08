@@ -1,4 +1,3 @@
-
 <div align="center">
 
 # # NodePulse 
@@ -26,6 +25,7 @@ For now only the WAX network is supported.
 - **Real-time Node Discovery**: Dynamically finds and connects to available nodes
 - **Fault Tolerance**: Maintains network integrity even if some nodes fail
 - **Custom Default Nodes**: Allows overriding of default nodes for specific node types and networks
+- **Node Types Supported**: Hyperion, Atomic API, LightAPI, and IPFS
 - **Network Supported**: WAX 
 
 ## Get-started
@@ -57,7 +57,7 @@ console.log(`Using node: ${node}`);
 
 You can customize the behavior of NodePulse by passing an options object when creating an instance. Available options include:
 
-- `nodeType`: Type of nodes to use ('hyperion' or 'atomic'). Default is 'hyperion'
+- `nodeType`: Type of nodes to use ('hyperion', 'atomic', 'lightapi', or 'ipfs'). Default is 'hyperion'
 - `network`: Network to use ('mainnet' or 'testnet'). Default is 'mainnet'
 - `nodeCount`: Number of nodes to retrieve from the API. Default is 3
 - `updateInterval`: How often (in milliseconds) to refresh the node list. Default is 30 seconds
@@ -139,6 +139,40 @@ const nodePulse = new NodePulse({
   streamingEnabled: true
 });
 
+const node = await nodePulse.getNode();
+console.log(`Using node: ${node}`);
+```
+
+**Example of using custom options with LightAPI Mainnet:**
+
+```js
+import { NodePulse } from '@sentnl/nodepulse';
+
+const nodePulse = new NodePulse({
+  nodeType: 'lightapi',
+  network: 'mainnet',
+  nodeCount: 3,
+  updateInterval: 60000 // Refresh every minute
+});
+
+// Retrieve a node from the custom configuration
+const node = await nodePulse.getNode();
+console.log(`Using node: ${node}`);
+```
+
+**Example of using custom options with IPFS nodes:**
+
+```js
+import { NodePulse } from '@sentnl/nodepulse';
+
+const nodePulse = new NodePulse({
+  nodeType: 'ipfs',
+  network: 'mainnet',
+  nodeCount: 3,
+  updateInterval: 60000 // Refresh every minute
+});
+
+// Retrieve a node from the custom configuration
 const node = await nodePulse.getNode();
 console.log(`Using node: ${node}`);
 ```
@@ -231,7 +265,7 @@ console.log(`Manually refreshed. Using node: ${node}`);
 
 ## Default Nodes
 
-If the API fails to return healthy nodes or an error occurs, NodePulse falls back to a predefined list of default nodes. The default nodes are separated by type (hyperion or atomic) and by network (mainnet or testnet).
+If the API fails to return healthy nodes or an error occurs, NodePulse falls back to a predefined list of default nodes. The default nodes are separated by type (hyperion, atomic, lightapi, or ipfs) and by network (mainnet or testnet).
 
 Default nodes:
 
@@ -259,6 +293,28 @@ this.defaultNodes = {
       'https://test.wax.api.atomicassets.io',
       'https://atomic-wax-testnet.eosphere.io',
       'https://testatomic.waxsweden.org',
+    ],
+  },
+  lightapi: {
+    mainnet: [
+      'https://lightapi.eosamsterdam.net',
+      'https://lightapi.eosrio.io',
+      'https://api.light.xeos.me',
+    ],
+    testnet: [
+      'https://testnet.lightapi.eosamsterdam.net',
+      'https://testnet.lightapi.eosrio.io',
+    ],
+  },
+  ipfs: {
+    mainnet: [
+      'https://ipfs.io',
+      'https://cloudflare-ipfs.com',
+      'https://gateway.pinata.cloud',
+    ],
+    testnet: [
+      'https://test-ipfs.pinata.cloud',
+      'https://test.ipfs.io',
     ],
   },
 };

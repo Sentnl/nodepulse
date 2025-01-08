@@ -23,4 +23,26 @@ export const DEFAULT_NODES = {
             'https://testatomic.waxsweden.org',
         ],
     },
+    lightapi: {
+        mainnet: [
+            'https://lightapi.eosamsterdam.net',
+            'https://lightapi.eosrio.io',
+            'https://api.light.xeos.me',
+        ],
+        testnet: [
+            'https://testnet.lightapi.eosamsterdam.net',
+            'https://testnet.lightapi.eosrio.io',
+        ],
+    },
+    ipfs: {
+        mainnet: [
+            'https://ipfs.io',
+            'https://cloudflare-ipfs.com',
+            'https://gateway.pinata.cloud',
+        ],
+        testnet: [
+            'https://test-ipfs.pinata.cloud',
+            'https://test.ipfs.io',
+        ],
+    },
 };
